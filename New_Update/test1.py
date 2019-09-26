@@ -1,32 +1,36 @@
 '''
 2019-09-12
 PIL处理图片
+PIL模块里的Image和ImageDraw
+先读入图片，添加文字到指定位置
 '''
 
-import matplotlib.image as mpimg
+
+import os
 from PIL import Image
-import numpy as np
+from PIL import ImageFont
+from PIL import ImageDraw
 
-img = Image.open('cert.png')
-# 模式L”为灰色图像，它的每个像素用8个bit表示，0表示黑，255表示白，其他数字表示不同的灰度。
-# Img = img.convert('L')
+# 读取证书模板图片
+cert = Image.open('cert.png')
 
-# 图片转为数组
-im_array = np.array(img)
-for i in im_array[210]:
-    i[1]=i[2] = 0
-
-new_im = Image.fromarray(im_array)
-# 显示图片
-new_im.show()
+# 读取文件内容
+rtext = '17121202036'
 
 
+#初始化参数
+word_size = 50
+word_css = 'arial.ttf'
 
-# # 图片二值化
-# photo = Img.point(table, '1')
-# photo.save("test1.jpg")
+# 设置字体
+font = ImageFont.truetype(word_css, word_size)
 
-
+# cert.show() # 图片显示
+# print(cert.mode) # 输出图片类型
+draw = ImageDraw.Draw(cert)
+draw.text((290, 400), rtext, fill=(255, 0, 0), font=font) # 添加文字（未知，内容，颜色，字体）
+cert.show()
+cert.save(rtext+'.pdf')
 
 
 
