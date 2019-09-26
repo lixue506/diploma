@@ -1,26 +1,5 @@
 # Diploma
 
-山东理工大学 ACM 会员培训证书平台
-
-------
-
-支持批量导入培训成绩，生成 PDF 证书供查询和打印。
-
-ACM 退役后写的第一个 Django 练手项目。已于年前上线，现搬运过来。
-
-### 环境依赖
-
-Python 包：
-- Django 2.0.x
-- PyMySQL 0.8.0
-- xlrd 1.1.0
-
-命令行工具：
-- [wkhtmltopdf](https://wkhtmltopdf.org/) 0.12.3
-
-数据库：
-- MySQL
-
 ### 运行前配置
 
 1. MySQL 建立数据库 `acmpx`
@@ -55,38 +34,6 @@ Python 包：
 - [Bootswatch](https://bootswatch.com/3/paper/)
 - [Font Awesome](https://fontawesome.com/)
 
-### 截图
 
-证书 PDF：
-
-![证书 PDF](screenshots/cert.png)
-
-证书查询：
-
-![证书查询](screenshots/certificate_inquiry.png)
-
-后台登录：
-
-![后台登录](screenshots/admin_login.png)
-
-后台：
-
-![后台](screenshots/admin.png)
-
-后台-培训管理：
-
-![后台-培训管理](screenshots/admin_training.png)
-
-后台-编辑培训：
-
-![后台-编辑培训](screenshots/admin_training_edit.png)
-
-后台-培训证书：
-
-![后台-培训证书](screenshots/admin_training_certificate.png)
-
-后台-培训证书上传：
-
-![后台-培训证书上传](screenshots/admin_training_certificate_upload.png)
 
 

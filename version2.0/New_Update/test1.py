@@ -30,7 +30,7 @@ font = ImageFont.truetype(word_css, word_size)
 draw = ImageDraw.Draw(cert)
 draw.text((290, 400), rtext, fill=(255, 0, 0), font=font) # 添加文字（未知，内容，颜色，字体）
 cert.show()
-cert.save(rtext+'.pdf')
+# cert.save(rtext+'.pdf')
 
 
 
