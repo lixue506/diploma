@@ -1,103 +1,51 @@
 <!DOCTYPE html>
-<script lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-        <script>
-        function userLogin() {
-
-		//发送ajax Post 请求完成登陆
-		// 获取用户名和密码
-		var username = document.getElementById("name").value;
-		var password = document.getElementById("pwd").value;
-		var msg = document.getElementById("tipMsg");
-		msg.innerHTML = "正在进行身份认证，请稍候";
-
-		// 创建ajax核心对象
-		var xhr = null;
-		if (window.XMLHttpRequest) {
-			xhr = new XMLHttpRequest();
-		} else {
-			xhr = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-
-		// 注册回调函数
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4) {
-				if (xhr.status == 200) {
-					// 接收服务器端发送的数据
-					// 假设服务器响应的是JSON格式的数据
-					var jsonString = xhr.responseText;
-					// 变成json对象
-					eval("var jsonObj=" + jsonString);//
-
-					if (jsonObj.success) {
-						// 登录成功
-						//document.location="list.do"
-						msg.innerHTML = "登录成功";
-					} else {
-						msg.innerHTML = "用户名不存在或密码错误";
-					}
-				}
-			}
-		}
-		// 开启通道
-		// 注意，例如用户注册页面，表单项可以设置为true，使用异步验证.
-		// 但是注册按钮必须使用同步，为的是提交按钮的时候，锁住页面，不允许操作
-		xhr.open("POST", "/ajax/login.do", true);
-		// 发送POST请求，必须使用表单提交，只有form表单才能提交post请求
-		// 使用post请求必须使用以下代码
-		// ajax post请求的乱码 需要在这里处理，注意 字符集需要和浏览器和服务器字符集相同
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");// 模拟表单提交数据
-
-		// 发送请求
-		// post 请求数据在send 中提交
-		xhr.send("username=" + username + "&password=" + password);
-
-	}
-</script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 
 <body>
-<form action="#" id="myform">
+<form method="post">
 
-    <div class="form-group">
         <input type="text"  id='name' placeholder="用户名">
         <input type="password" id='pwd' placeholder="密码">
-    </div>
-    <button type="submit" class="btn btn-block btn-primary">登录</button>
-    <span id="tipMsg" style="font-size: 12px; color: red;"></span>
+
+    <button onclick="func()" >登录</button>
 
 </form>
 
-<!--<script>-->
-<!--$(document).ready(function( ) {-->
-<!--    $('button').click(function() {-->
-<!--        $.ajax({-->
-<!--            type:'post',-->
-<!--            url:'/Admin/Login',-->
-<!--            data:$('#myform').serialize() //序列化表单数据-->
-<!--            true:true,-->
-<!--            dataType:'json',-->
-<!--            success:function (data) {-->
-<!--                if (data.name == null || data.pwd == null)-->
-<!--                {-->
-<!--                    alter('输入信息不全！');-->
-<!--                }-->
-<!--                else-->
-<!--                {-->
-<!--                    window.location.href = '/Admin/index'-->
-<!--                }-->
-<!--                }-->
-<!--            error:function() {-->
-<!--                alert('登陆失败！');-->
-<!--            }-->
-
-<!--        })-->
-
-<!--    })-->
-<!--})-->
-<!--</script>-->
-
 </body>
+
+<script>
+    function func() {
+        var name = $("#name").val();
+        var pwd = $("#pwd").val();
+        if (name == '' || pwd == '') {
+            alert("请输入信息完整！");
+        }
+        else {
+            $.ajax({
+                url: '/Login/Judge',
+                type: 'POST',
+                data: {'name': name, 'pwd': pwd},
+                dataType: 'json',
+                success: function (data) {
+
+                    if (data.status == '1') {
+                        window.location.href = "/Admin/index"
+                    }
+                    else {
+                        alert("登陆信息有误！")
+                    }
+                },
+                error: function (e) {
+                    alert("登陆信息有误，请重新登陆！");
+                }
+            })
+        }
+    }
+</script>
+
 </html>
