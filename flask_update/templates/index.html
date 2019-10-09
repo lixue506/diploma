@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+
+<form method="get">
+
+    <select id="sel">
+        <option value="school_id">学号</option>
+        <option value="certificate_number">证书编号</option>
+    </select>
+
+    <input type="text" name="query" id="query" placeholder="输入查询内容">
+
+    <button onclick="func()">查询</button>
+</form>
+
+
+<div class="result-list">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>证书编号</th>
+                        <th>培训场次</th>
+                        <th>持有者</th>
+                        <th>分数</th>
+                        <th>排名</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr id="get_result"></tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+
+</body>
+<script>
+    function func() {
+        $.ajax({
+            url:'/Query',
+            type:'POST',
+            data:{'kind':$('#sel').val(),'query':$("#query").val()},
+            dataType:'json',
+            success:function (data) {
+                str = ''
+                for (var item in data) {
+                   str = str + "<tr><th>"+data[item].id+"</th><th>"+data[item].times+"</th><th>"+data[item].name+"</th><th>"+data[item].score+"</th><th>"+data[item].click+"</th></tr>"
+                }$('#get_result').html(str)
+            },
+            error:function () {
+                alert("ERROR!");
+            }
+        })
+    }
+</script>
+
+</html>
