@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>简单的js点击隐藏和展开div层效果</title>
+</head>
+
+<body>
+
+
+<div id="box" style="border:1px solid #000; height:300px;          width:300px;display:none" ></div>
+
+<input name="" type="button"  value="点击显示"  id="btn" onclick="btn()"  style="position:absolute; left:320px; top:10px;">
+
+
+</body>
+<script type="text/javascript">
+var btn1=document.getElementById('btn');
+var box1=document.getElementById('box');
+function btn(){ if(btn1.value=="点击隐藏"){box1.style.display='none';btn1.value="点击显示";
+ }else{box1.style.display='';btn1.value="点击隐藏";
+}
+}
+</script>
+</html>

@@ -5,6 +5,44 @@
     <title>Edit</title>
 </head>
 <body>
+<form method="post">
 
+    <input type="text"  id='name' placeholder="用户名">
+    <input type="password" id='pwd' placeholder="密码">
+
+    <button onclick="func()" >申请新管理员</button>
+
+</form>
 </body>
+
+<script>
+function func() {
+        var name = $("#name").val();
+        var pwd = $("#pwd").val();
+        if (name == '' || pwd == '') {
+            alert("请输入信息完整！");
+        }
+        else {
+            $.ajax({
+                url: '/Admin/edit',
+                type: 'POST',
+                data: {'name': name, 'pwd': pwd},
+                dataType: 'json',
+                success: function (data) {
+
+                    if (data.status == '1') {
+                        window.location.href = "/Admin/index"
+                    }
+                    else {
+                        alert("信息有误！")
+                    }
+                },
+                error: function (e) {
+                    alert("信息有误，请重新登陆！");
+                }
+            })
+        }
+    }
+</script>
+
 </html>

@@ -19,34 +19,24 @@
     <button onclick="func();return false">查询</button>
 </form>
 
-<table class="table table-striped">
-<thead>
-    <tr>
-        <th>证书编号</th>
-        <th>培训场次</th>
-        <th>持有者</th>
-        <th>分数</th>
-        <th>排名</th>
-        <th>操作</th>
-    </tr>
-</thead>
-<tbody id="get_result">
+<table id="get_result">
 
-</tbody>
 </table>
 
 </body>
 <script>
+
     function func() {
         $.ajax({
             url:'/Query',
             type:'GET',
             data:{'kind':$('#sel').val(),'query':$("#query").val()},
+
             dataType:'json',
             success:function (data) {
-                str = ''
+                str = "<thead><th>证书编号</th><th>持有者</th><th>获得时间</th><th>查看</th><th>下载</th></tr></thead>"
                 for (var item in data) {
-                   str = str + "<tr><th>"+data[item].id+"</th><th>"+data[item].times+"</th><th>"+data[item].name+"</th><th>"+data[item].score+"</th><th>"+data[item].rank+"</th><th>"+data[item].click+"</th></tr>"
+                   str = str + "<tr><th>"+data[item].Id+"</th><th>"+ data[item].User +"</th><th>"+data[item].Times+"</th><th>"+data[item].Show+"</th><th>"+data[item].Download+"</th></tr>"
                 }$('#get_result').html(str)
             },
             error:function () {
